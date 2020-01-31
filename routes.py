@@ -23,7 +23,7 @@ books = [
 def main_():
     return "<h1>Hello Bro!<h1>"
 
-@app.route("/sample")
+@app.route("/sample", methods = ['GET', 'POST'])
 def api():
     return jsonify(books)
     
