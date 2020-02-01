@@ -17,6 +17,3 @@ class Database:
 
             except:
                 return 'User does not exist'
-
-
-,
