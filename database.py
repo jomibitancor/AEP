@@ -11,8 +11,8 @@ class Database:
         
         with self.connection.cursor() as cursor:
             try:
-                sql = "SELECT `username` FROM `users` WHERE `username`=%s"
-                cursor.execute(sql, (self.username,))
+                sql = "SELECT `username`, `password` FROM `users` WHERE `username`=%s AND `password=%d`"
+                cursor.execute(sql, (self.username, self.password, ))
                 result = cursor.fetchone()
                 return result
 
