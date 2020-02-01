@@ -1,10 +1,10 @@
 import os
 import jwt
 import datetime
-from aep import app
+from aep import app #, database
 from flask import jsonify, request
 from functools import wraps
-from database import Database
+from .database import db
 
 app.config['SECRET_KEY'] = os.environ["SECRET_KEY"]
 
