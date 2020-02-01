@@ -1,4 +1,5 @@
 import pymysql
+import os
 
 class Database:
     def __init__(self, username, password):
