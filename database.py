@@ -11,11 +11,11 @@ class Database:
         
         with self.connection.cursor() as cursor:
 
-            sql = "SELECT `username`, `password` FROM `users` WHERE `username`=%s AND `password=%d`"
+            sql = "SELECT `username`, `password` FROM `users` WHERE `username`=%s AND `password`=%d"
             cursor.execute(sql, (self.username, self.password, ))
             result = cursor.fetchone()
 
             if result:
                 return result
             else: 
-                return "User does not exist"
+                return None
