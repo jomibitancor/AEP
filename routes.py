@@ -32,10 +32,13 @@ def protected():
 
 @app.route("/login", methods= ['POST'])
 def login():
+    
     request_data = request.get_json()
     username = request_data['username']
     password = request_data['password']
 
+    db = Database()
+    
     if db.verify(username, password):
         return {"message": "success"}    
     else:

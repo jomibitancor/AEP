@@ -17,5 +17,3 @@ class Database:
                 return result
             else: 
                 return None
-
-db = Database()
