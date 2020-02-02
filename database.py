@@ -2,12 +2,10 @@ import pymysql
 import os
 
 class Database:
-    def __init__(self, username="", password=""):
-        self.connection = pymysql.connect(host="localhost",user="jomirosn_jomi",  password= os.environ['DB_PASSWORD'], db = 'jomirosn_aep_database', cursorclass=pymysql.cursors.DictCursor)
-        self.username = username
-        self.password = password
+    def __init__(self):
+        self.connection = pymysql.connect(host="localhost",user="jomirosn_jomi",  password= os.environ['DB_PASSWORD'], db = 'jomirosn_aep_database', cursorclass=pymysql.cursors.DictCursor)    
 
-    def verify(self):
+    def verify(self, username, password):
         
         with self.connection.cursor() as cursor:
 
