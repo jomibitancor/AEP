@@ -1,10 +1,10 @@
 import os
 import jwt
 import datetime
-from aep import app, database
+from aep import app
 from flask import jsonify, request
 from functools import wraps
-# from database import db
+from database import Database
 
 app.config['SECRET_KEY'] = os.environ["SECRET_KEY"]
 
@@ -38,7 +38,7 @@ def login():
     password = request_data['password']
 
     db = Database()
-    
+
     if db.verify(username, password):
         return {"message": "success"}    
     else:
