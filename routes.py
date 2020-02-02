@@ -38,22 +38,12 @@ def login():
     password = request_data['password']
 
     db = Database()
-
-    if db.verify(username, password):
-        return {"message": "success"}    
-    else:
-        return {"username": username, "password": password}
-
-    # try:
-    #     request_data = request.get_json()
-    #     username = request_data['username']
-    #     password = request_data['password']
         
-    #     if db.verify(username, password):
-    #         token = jwt.encode({'user': username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])
-    #         return {"token": token.decode('UTF-8')}
-    #     else:
-    #         return {"message": "Incorrect credentials", "username": username, "password": password}
+    if db.verify(username, password):
+        token = jwt.encode({'user': username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])
+        return {"token": token.decode('UTF-8')} 
+    else:
+        return {"message": "Login failed! Please check your credentials"}
 
     # except:
     #     return {"message": "ERROR: Unauthorized"}
