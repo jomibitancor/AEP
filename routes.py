@@ -1,10 +1,10 @@
 import os
 import jwt
 import datetime
-from aep import app #, database
+from aep import app, database
 from flask import jsonify, request
 from functools import wraps
-from database import db
+# from database import db
 
 app.config['SECRET_KEY'] = os.environ["SECRET_KEY"]
 
@@ -40,4 +40,4 @@ def login():
         token = jwt.encode({'user': username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])
         return {"token": token.decode('UTF-8')}
 
-    return jsonify({"message": "ERROR: Unauthorized"}), 401
+    return {"message": "ERROR: Unauthorized"}
