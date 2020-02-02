@@ -33,7 +33,14 @@ def protected():
 @app.route("/login", methods= ['POST'])
 def login():
     request_data = request.get_json()
-    return {"payload": request_data}
+    username = request_data['username']
+    password = request_data['password']
+
+    if db.verify(username, password):
+        return {"message": "success"}    
+    else:
+        return {"username": username, "password": password}
+
     # try:
     #     request_data = request.get_json()
     #     username = request_data['username']
