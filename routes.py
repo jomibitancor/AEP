@@ -40,6 +40,8 @@ def login():
         if db.verify(username, password):
             token = jwt.encode({'user': username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])
             return {"token": token.decode('UTF-8')}
+        else:
+            return {"message": "Incorrect credentials", "username": username, "password": password}
 
     except:
         return {"message": "ERROR: Unauthorized"}
