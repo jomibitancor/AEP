@@ -4,7 +4,7 @@ import datetime
 from aep import app
 from flask import jsonify, request
 from functools import wraps
-from database import Database
+from aep.database import Database
 
 app.config['SECRET_KEY'] = os.environ["SECRET_KEY"]
 
