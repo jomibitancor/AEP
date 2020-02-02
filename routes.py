@@ -32,16 +32,18 @@ def protected():
 
 @app.route("/login", methods= ['POST'])
 def login():
-    try:
-        request_data = request.get_json()
-        username = request_data['username']
-        password = request_data['password']
+    request_data = request.get_json()
+    return {"payload": request_data}
+    # try:
+    #     request_data = request.get_json()
+    #     username = request_data['username']
+    #     password = request_data['password']
         
-        if db.verify(username, password):
-            token = jwt.encode({'user': username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])
-            return {"token": token.decode('UTF-8')}
-        else:
-            return {"message": "Incorrect credentials", "username": username, "password": password}
+    #     if db.verify(username, password):
+    #         token = jwt.encode({'user': username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])
+    #         return {"token": token.decode('UTF-8')}
+    #     else:
+    #         return {"message": "Incorrect credentials", "username": username, "password": password}
 
-    except:
-        return {"message": "ERROR: Unauthorized"}
+    # except:
+    #     return {"message": "ERROR: Unauthorized"}
