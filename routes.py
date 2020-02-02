@@ -30,12 +30,12 @@ def main_():
 def protected():
     return "Lmao gottem!"
 
-@app.route("/login", methods= ['GET'])
+@app.route("/login", methods= ['POST'])
 def login():
     try:
-        headers = request.headers
-        username = headers.get("username")
-        password = headers.get("password")
+        request_data = request.get_json()
+        username = request_data['username']
+        password = request_data['password']
         
         if db.verify(username, password):
             token = jwt.encode({'user': username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])
