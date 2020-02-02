@@ -32,12 +32,14 @@ def protected():
 
 @app.route("/login", methods= ['GET'])
 def login():
-    headers = request.headers
-    username = headers.get("username")
-    password = headers.get("password")
-    
-    if db.verify(username, password):
-        token = jwt.encode({'user': username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])
-        return {"token": token.decode('UTF-8')}
+    try:
+        headers = request.headers
+        username = headers.get("username")
+        password = headers.get("password")
+        
+        if db.verify(username, password):
+            token = jwt.encode({'user': username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])
+            return {"token": token.decode('UTF-8')}
 
-    return {"message": "ERROR: Unauthorized"}
+    except:
+        return {"message": "ERROR: Unauthorized"}
