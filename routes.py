@@ -27,12 +27,12 @@ def main_():
 
 @app.route("/data_send_mode1", methods=['POST'])
 @token_required
-def protected():
+def folder_mode():
     return "Folder Mode"
 
 @app.route("/data_send_mode2", methods=['POST'])
 @token_required
-def protected():
+def continuous_mode():
     return "Continuous Mode"    
 
 @app.route("/login", methods= ['POST'])
