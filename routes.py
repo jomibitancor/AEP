@@ -16,19 +16,21 @@ def token_required(f):
             data = jwt.decode(token, app.config['SECRET_KEY'])
         except:
             return {'message': 'Token is missing or invalid'}
+
         return f(*args, **kwargs)
-    return decorated
+
+    return decorated    
 
 @app.route("/")
 def main_():
     return "<h1>Welcome to Alberta Environment Parks: Air Quality Monitoring API<h1>"
 
-@app.route("/append_mode1", methods=['POST'])
+@app.route("/data_send_mode1", methods=['POST'])
 @token_required
 def protected():
     return "Folder Mode"
 
-@app.route("/append_mode2", methods=['POST'])
+@app.route("/data_send_mode2", methods=['POST'])
 @token_required
 def protected():
     return "Continuous Mode"    
