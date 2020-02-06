@@ -38,9 +38,10 @@ def continuous_mode():
 @app.route("/login", methods= ['POST'])
 def login():
     
-    request_data = request.get_json()
-    username = request_data['username']
-    password = request_data['password']
+    request_received = request.get_json(force=True)
+    if request_received:
+        username = request_received['username']
+        password = request_received['password']
 
     db = Database()
         

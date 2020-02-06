@@ -3,7 +3,7 @@ import os
 
 class Database:
     def __init__(self):
-        self.connection = pymysql.connect(host="localhost",user="jomirosn_jomi",  password= os.environ['DB_PASSWORD'], db = 'jomirosn_aep_database', cursorclass=pymysql.cursors.DictCursor)    
+        self.connection = pymysql.connect(host="localhost",user="jomirosn_jomi",  password= os.environ['DB_PASSWORD'], db = 'jomirosn_aep_database', cursorclass=pymysql.cursors.DictCursor, port = int(os.environ['MYSQL_PORT_NUMBER']))    
 
     def verify(self, username, password):
         
