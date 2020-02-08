@@ -11,7 +11,7 @@ app.config['SECRET_KEY'] = os.environ["SECRET_KEY"]
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
-        token = request.args.get('token') 
+        token = request.headers.get('token') 
         try:
             data = jwt.decode(token, app.config['SECRET_KEY'])
         except:
@@ -28,7 +28,11 @@ def main_():
 @app.route("/data_send_mode1", methods=['POST'])
 @token_required
 def folder_mode():
-    return "Folder Mode"
+    data_received = request.get_json(force=True)
+    payload = data_received['payload']
+    db = Database()
+    db.insert_data(payload)
+    return {'message': 'success'}
 
 @app.route("/data_send_mode2", methods=['POST'])
 @token_required
