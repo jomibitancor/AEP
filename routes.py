@@ -7,6 +7,7 @@ from functools import wraps
 from aep.database import Database
 
 app.config['SECRET_KEY'] = os.environ["SECRET_KEY"]
+db = Database()
 
 def token_required(f):
     @wraps(f)
@@ -30,14 +31,16 @@ def main_():
 def folder_mode():
     data_received = request.get_json(force=True)
     payload = data_received['payload']
-    db = Database()
     db.insert_data(payload)
     return {'message': 'success'}
 
 @app.route("/data_send_mode2", methods=['POST'])
 @token_required
 def continuous_mode():
-    return "Continuous Mode"    
+    data_received = request.get_json(force=True)
+    payload = data_received['payload']
+    db.insert_data(payload)
+    return {'message': 'success'}   
 
 @app.route("/login", methods= ['POST'])
 def login():
@@ -47,7 +50,6 @@ def login():
         username = request_received['username']
         password = request_received['password']
 
-    db = Database()
         
     if db.verify(username, password):
         token = jwt.encode({'user': username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=24)}, app.config['SECRET_KEY'])
