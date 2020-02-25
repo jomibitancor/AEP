@@ -50,7 +50,7 @@ def login():
     db = Database()
         
     if db.verify(username, password):
-        token = jwt.encode({'user': username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])
+        token = jwt.encode({'user': username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=24)}, app.config['SECRET_KEY'])
         return {"token": token.decode('UTF-8')} 
     else:
         return {"message": "Login failed! Please check your credentials"}
